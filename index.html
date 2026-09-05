@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>A Surprise for Abinaya</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="confetti-layer"></div>
+<div id="fireworks-layer" aria-hidden="true"></div>
+
+<!-- SCREEN 1: PASSWORD -->
+<section id="screen-password" class="screen active">
+  <div class="aurora-blobs" aria-hidden="true">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+    <span class="blob b4"></span>
+  </div>
+
+  <div class="floating-decor" aria-hidden="true">
+    <span class="decor d1">✨</span>
+    <span class="decor d2">🎈</span>
+    <span class="decor d3">🎊</span>
+    <span class="decor d4">⭐</span>
+    <span class="decor d5">🎁</span>
+    <span class="decor d6">💫</span>
+    <span class="decor d7">🎈</span>
+    <span class="decor d8">✨</span>
+  </div>
+
+  <div class="party-wrap" id="gift-wrap">
+    <div class="gift-box" id="gift-box">
+
+      <!-- Closed state: fully wrapped gift, covers the whole card -->
+      <div class="gift-closed" id="gift-closed">
+        <div class="ribbon-v"></div>
+        <div class="ribbon-h"></div>
+        <div class="bow">🎀</div>
+        <p class="tap-hint">Tap to Unwrap 🎁</p>
+      </div>
+
+      <!-- Revealed state: password form underneath -->
+      <div class="gift-form" id="gift-form">
+        <h1>A Little Surprise for<br><span class="name">Abinaya</span></h1>
+        <p class="subtitle">Enter the secret password to unlock it</p>
+        <form id="password-form">
+          <input type="password" id="password-input" placeholder="Password" autocomplete="off" />
+          <button type="submit">Unlock 🔓</button>
+        </form>
+        <p id="password-error">Hey Aatakaari…💃💃 you had ONE job. Try again😂  </p>
+
+        <div class="mini-countdown" id="mini-countdown">
+          <p class="mini-countdown-label">Counting down to the big day</p>
+          <div class="mini-countdown-timer">
+            <div class="mini-time-box"><span id="mini-cd-days">0</span><label>Days</label></div>
+            <div class="mini-time-box"><span id="mini-cd-hours">0</span><label>Hrs</label></div>
+            <div class="mini-time-box"><span id="mini-cd-minutes">0</span><label>Min</label></div>
+            <div class="mini-time-box"><span id="mini-cd-seconds">0</span><label>Sec</label></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SCREEN 2: HOME (countdown gate + gallery/message once unlocked by date) -->
+<section id="screen-gallery" class="screen">
+  <div class="aurora-blobs" aria-hidden="true">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+    <span class="blob b4"></span>
+  </div>
+
+  <div class="floating-decor" aria-hidden="true">
+    <span class="decor d1">✨</span>
+    <span class="decor d2">🎈</span>
+    <span class="decor d3">🎊</span>
+    <span class="decor d4">⭐</span>
+    <span class="decor d5">🎁</span>
+    <span class="decor d6">💫</span>
+    <span class="decor d7">🎈</span>
+    <span class="decor d8">✨</span>
+  </div>
+
+  <div class="home-layout" id="home-layout">
+
+    <div class="home-content" id="home-content">
+      <h1 class="section-title">Our Favorite Moments 📸</h1>
+      <div class="gallery-grid" id="gallery-grid"></div>
+
+      <div class="message-card">
+        <h2>Happy Birthday, Abinaya! 💌</h2>
+        <p>
+          Wishing you a day as wonderful and bright as you are. May this new year of life
+          bring you endless laughter, exciting adventures, and all the little joys you deserve.
+          Thank you for being exactly who you are — thoughtful, funny, and full of light.
+          Here's to celebrating you today and always!
+        </p>
+        <p class="signoff">With love always 🎁</p>
+      </div>
+
+      <div class="quotes-grid" id="home-quotes-grid"></div>
+
+      <button id="continue-btn" class="primary-btn">See the Countdown ➜</button>
+    </div>
+
+    <div class="home-countdown-panel" id="home-countdown-panel">
+      <p class="home-countdown-label">Counting down to<br>Abinaya's Birthday 🎉</p>
+      <div class="home-countdown-timer">
+        <div class="time-box"><span id="home-cd-days">0</span><label>Days</label></div>
+        <div class="time-box"><span id="home-cd-hours">0</span><label>Hours</label></div>
+        <div class="time-box"><span id="home-cd-minutes">0</span><label>Minutes</label></div>
+        <div class="time-box"><span id="home-cd-seconds">0</span><label>Seconds</label></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SCREEN 3: COUNTDOWN -->
+<section id="screen-countdown" class="screen">
+  <div class="aurora-blobs" aria-hidden="true">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+    <span class="blob b4"></span>
+  </div>
+
+  <div class="content-wrap countdown-wrap">
+    <h1 class="section-title" id="countdown-title">Countdown to the Big Day 🎊</h1>
+
+    <div class="countdown-timer" id="countdown-timer">
+      <div class="time-box"><span id="cd-days">0</span><label>Days</label></div>
+      <div class="time-box"><span id="cd-hours">0</span><label>Hours</label></div>
+      <div class="time-box"><span id="cd-minutes">0</span><label>Minutes</label></div>
+      <div class="time-box"><span id="cd-seconds">0</span><label>Seconds</label></div>
+    </div>
+
+    <div class="quote-box">
+      <p id="quote-text">Loading a lovely quote...</p>
+    </div>
+
+    <div id="celebration" class="celebration hidden">
+      <h1>🎉 Happy Birthday Abinaya! 🎉</h1>
+      <p>Today is your day — go shine!</p>
+    </div>
+  </div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
