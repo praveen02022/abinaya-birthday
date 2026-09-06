@@ -3,7 +3,7 @@
 const PASSWORD = "july15";
 
 // Countdown target — Sep 9, 12:00 AM IST. Change this if the celebration date/time is different.
-const BIRTHDAY_TARGET = new Date("2026-09-05T00:00:00+05:30");
+const BIRTHDAY_TARGET = new Date("2026-09-09T00:00:00+05:30");
 
 // Home screen background: drop a clear, high-quality photo at this path.
 // A dark shade is layered on top so text stays readable. Falls back to the
