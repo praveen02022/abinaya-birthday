@@ -3,22 +3,27 @@
 const PASSWORD = "july15";
 
 // Countdown target — Sep 9, 12:00 AM IST. Change this if the celebration date/time is different.
-const BIRTHDAY_TARGET = new Date("2026-09-09T00:00:00+05:30");
+const BIRTHDAY_TARGET = new Date("2026-09-05T00:00:00+05:30");
 
-// Photos: drop image files into the images/ folder and list their filenames here.
-// Until then, cute placeholder tiles are shown instead.
+// Home screen background: drop a clear, high-quality photo at this path.
+// A dark shade is layered on top so text stays readable. Falls back to the
+// colorful gradient if the file is missing.
+const HOME_BACKGROUND = "images/background.jpeg";
+
+// Gallery: exactly 4 photos. Drop the files into images/ with these names.
+// Any missing photo shows a cute placeholder tile until you add it.
 const PHOTOS = [
-  // "images/photo1.jpg",
-  // "images/photo2.jpg",
-  // "images/photo3.jpg",
+  { src: "images/photo1.jpeg", caption: "Sweetest smile" },
+  { src: "images/photo2.jpeg", caption: "Starlight Girl" },
+  { src: "images/photo3.jpeg", caption: "Always shining" },
+  { src: "images/photo4.jpeg", caption: "Forever young" },
 ];
 
 const QUOTES = [
-  "\"Count your life by smiles, not tears. Count your age by friends, not years.\"",
-  "\"Birthdays are nature's way of telling us to eat more cake.\"",
-  "\"May your day be as beautiful and bright as your smile.\"",
-  "\"Another year older, another year more wonderful.\"",
-  "\"Today is your day — dream big, laugh loud, and celebrate you!\"",
+  "\"My favorite place will always be wherever I get to see you smile.🤍❤️\"",
+  "\"You're not just someone I love; you're one of the most beautiful parts of my life.🤍❤️\"",
+  "\"Today is your day — dream big, laugh loud, and celebrate you!.🤍❤️\"",
+  "\"Keep shining, Angel Queen.  I Love You clmm🤍❤️\"",
 ];
 
 /* ---------- APP LOGIC (no need to edit below) ---------- */
@@ -69,24 +74,46 @@ passwordForm.addEventListener("submit", (e) => {
 const galleryGrid = document.getElementById("gallery-grid");
 
 function renderGallery() {
-  if (PHOTOS.length === 0) {
-    const placeholderEmojis = ["🎀", "🌸", "🦋", "✨", "🍰", "🎈"];
-    placeholderEmojis.forEach((emoji) => {
-      const div = document.createElement("div");
-      div.className = "gallery-placeholder";
-      div.textContent = emoji;
-      galleryGrid.appendChild(div);
-    });
-  } else {
-    PHOTOS.forEach((src) => {
-      const img = document.createElement("img");
-      img.src = src;
-      img.alt = "A favorite memory";
-      galleryGrid.appendChild(img);
-    });
-  }
+  const placeholderEmojis = ["🎀", "🌸", "🦋", "✨"];
+
+  PHOTOS.slice(0, 4).forEach((photo, i) => {
+    const frame = document.createElement("figure");
+    frame.className = "polaroid";
+
+    const img = document.createElement("img");
+    img.src = photo.src;
+    img.alt = photo.caption || "A favorite memory";
+    img.loading = "lazy";
+
+    // If the file isn't there yet, swap in a placeholder tile
+    img.onerror = () => {
+      const placeholder = document.createElement("div");
+      placeholder.className = "polaroid-placeholder";
+      placeholder.textContent = placeholderEmojis[i % placeholderEmojis.length];
+      img.replaceWith(placeholder);
+    };
+
+    const caption = document.createElement("figcaption");
+    caption.textContent = photo.caption || "";
+
+    frame.appendChild(img);
+    frame.appendChild(caption);
+    galleryGrid.appendChild(frame);
+  });
 }
 renderGallery();
+
+/* ----- Home screen background image (with shade overlay) ----- */
+function applyHomeBackground() {
+  if (!HOME_BACKGROUND) return;
+  const probe = new Image();
+  probe.onload = () => {
+    screens.gallery.style.setProperty("--home-bg", `url("${HOME_BACKGROUND}")`);
+    screens.gallery.classList.add("has-bg");
+  };
+  probe.src = HOME_BACKGROUND;
+}
+applyHomeBackground();
 
 document.getElementById("continue-btn").addEventListener("click", () => {
   showScreen("countdown");

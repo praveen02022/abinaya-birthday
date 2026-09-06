@@ -428,49 +428,74 @@ button:hover, .primary-btn:hover {
   margin-bottom: 1.5rem;
 }
 
+/* 4-photo polaroid mosaic: 2x2, each frame gently tilted like pinned photos */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 1rem;
-  margin-bottom: 2rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.4rem 1.2rem;
+  margin: 0 auto 2.2rem;
+  max-width: 520px;
+  padding: 0.5rem;
+}
+
+.polaroid {
+  margin: 0;
+  background: #fff;
+  padding: 10px 10px 12px;
+  border-radius: 8px;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.22);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.polaroid:nth-child(1) { transform: rotate(-3deg); }
+.polaroid:nth-child(2) { transform: rotate(2.5deg); }
+.polaroid:nth-child(3) { transform: rotate(2deg); }
+.polaroid:nth-child(4) { transform: rotate(-2.5deg); }
+
+.polaroid:hover {
+  transform: rotate(0deg) scale(1.06);
+  box-shadow: 0 22px 40px rgba(0,0,0,0.3);
+  z-index: 2;
+  position: relative;
+}
+
+.polaroid img,
+.polaroid-placeholder {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.polaroid-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.4rem;
+  background: linear-gradient(135deg, var(--pink), var(--mint));
+}
+
+.polaroid figcaption {
+  margin-top: 8px;
+  font-family: 'Pacifico', cursive;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  text-align: center;
 }
 
 @media (max-width: 480px) {
   .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.7rem;
+    gap: 1rem 0.8rem;
   }
 
-  .gallery-grid img,
-  .gallery-placeholder {
-    height: 130px;
-    border-radius: 16px;
+  .polaroid {
+    padding: 7px 7px 9px;
   }
-}
 
-.gallery-grid img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 20px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
-  transition: transform 0.25s;
-}
-
-.gallery-grid img:hover {
-  transform: scale(1.05) rotate(-1deg);
-}
-
-.gallery-placeholder {
-  width: 100%;
-  height: 180px;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.2rem;
-  background: linear-gradient(135deg, var(--pink), var(--mint));
-  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  .polaroid figcaption {
+    font-size: 0.8rem;
+  }
 }
 
 .message-card {
@@ -592,6 +617,66 @@ button:hover, .primary-btn:hover {
 /* Once the birthday arrives: countdown panel steps aside for the full content */
 .home-layout.post-birthday .home-countdown-panel {
   display: none;
+}
+
+/* ---------- Home screen photo background with shade overlay ---------- */
+#screen-gallery.has-bg {
+  background:
+    linear-gradient(180deg, rgba(20, 8, 30, 0.28) 0%, rgba(20, 8, 30, 0.12) 45%, rgba(20, 8, 30, 0.4) 100%),
+    var(--home-bg) center / cover no-repeat fixed;
+}
+
+/* The photo is the star: hide the blobs, keep decor faint */
+#screen-gallery.has-bg .aurora-blobs { display: none; }
+#screen-gallery.has-bg .floating-decor { opacity: 0.5; }
+
+/* Lift text onto the photo */
+#screen-gallery.has-bg .section-title {
+  color: #fff;
+  text-shadow: 0 4px 16px rgba(0,0,0,0.6);
+}
+
+/* Frosted-glass cards: the photo stays visible through them */
+#screen-gallery.has-bg .message-card,
+#screen-gallery.has-bg .quote-tile,
+#screen-gallery.has-bg .home-countdown-panel {
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+  color: #fff;
+}
+
+#screen-gallery.has-bg .message-card h2,
+#screen-gallery.has-bg .home-countdown-label {
+  color: #ffd6e8;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+#screen-gallery.has-bg .message-card p,
+#screen-gallery.has-bg .quote-tile,
+#screen-gallery.has-bg .signoff {
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.45);
+}
+
+#screen-gallery.has-bg .home-countdown-timer .time-box {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: none;
+}
+
+#screen-gallery.has-bg .home-countdown-timer .time-box label {
+  color: #fff;
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  /* `fixed` backgrounds jitter on mobile browsers; scroll with the page there */
+  #screen-gallery.has-bg { background-attachment: scroll, scroll; }
 }
 
 /* ---------- Countdown screen ---------- */
