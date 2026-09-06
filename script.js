@@ -39,7 +39,7 @@ function showScreen(name) {
   screens[name].classList.add("active");
 }
 
-/* ----- Password screen ----- */
+/* ----- Password scree----- */
 const passwordForm = document.getElementById("password-form");
 const passwordInput = document.getElementById("password-input");
 const passwordError = document.getElementById("password-error");
